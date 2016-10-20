@@ -1,7 +1,7 @@
 var battleArena = $('.battleContainer');
 
 function renderBattleArena(battleArena, character, boss) {
-  //as there is only currently only one player all action buttons only need to provide responses for one player 
+  //as there is only currently only one player all action buttons only need to provide responses for one player
   var $actionNav = $('<nav class="characterActions"></nav>');
   var $attackButton = $('<button class="attack">Attack</button>');
   var $defendButton = $('<button class="defend">Defend</button>');
@@ -52,23 +52,3 @@ function renderBattleArena(battleArena, character, boss) {
 }
 
 renderBattleArena(battleArena);
-
-// this.attack === sword
-//
-// Character.prototype.attack = function () {
-//   if (char1) {
-//     damage = 3;
-//   } else if (char2) {
-//     damage = 4;
-//   } else if (char3) {
-//
-//   }
-//
-//   var damage = 2;
-//   return damage;
-// }
-
-// button clicked {
-//   computer HP - character1.slash()
-//
-// }
