@@ -1,40 +1,31 @@
 
 //Select Character Screen
 //Characters Constructor
-function Characters(name, weapon, defend, special, liner, health, avatar) {
+function Characters(name, weapon, special, liner, health, avatar) {
     this.name = name;
     this.weapon = weapon;
-    this.defend = defend;
+    // this.shield = sheild;
     this.specialPower = special;
     this.liner = liner;
     this.health = health;
+    this.totalHealth = health;
     this.avatar = avatar;
 }
-
-
-
-
-var linkAvatar = new Image(100, 200);
-linkAvatar.src = 'images/Zelda.png';
-console.log(linkAvatar);
-
-
 
 //Character Storage Array
 var characterArray = [];
 
-
 //Define Characters
-var character1 = new Characters('link', 'sword', 0, 'chain', '"zelda is bae"', 10, linkAvatar);
-var character2 = new Characters('megaman', 'fireball', 0, 'explode', '"I hate Dr.Wily"', 11);
-var character3 = new Characters('ryu', 'kick', 0, 'tornado punch', '"Hiyuken"', 12);
-var boss = new Characters('bowser', 'punch', 0, 'squash', ':Rawr', 15);
+var link = new Characters('link', 'sword', 'chain', '"zelda is bae"', 20);
+var megaman = new Characters('megaman', 'fireball', 'explode', '"I hate Dr.Wily"', 21);
+var ryu = new Characters('ryu', 'kick', 'tornado punch', '"Hiyuken"', 22);
+var boss = new Characters('bowser', 'punch', 'squash', ':Rawr', 25);
 
 
 //Add Characters to Storage Array
-characterArray.push(character1, character2, character3);
+characterArray.push(link, megaman, ryu);
 
-console.log(characterArray);
+// console.log(characterArray);
 
 
 //Characters Container
@@ -42,34 +33,37 @@ var selectCharacter= $('.select-character');
 var characters = $('.characters');
 
 //Loop Through Characters for Attributes
-characterArray.forEach(function(character, i, array) {
+// characterArray.forEach(function(character, i, array) {
+//
+    // var characterContainer = $('<li class="chracters-list' + [i] + '"><h3 class = "character-name'+[i]+'">' + character.name + '</h3><div class= "character-infoContainer"><div class="character-info' + [i]+'"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div></div><button class="select link">Select Link</button></li>');
+    // characters.append(characterContainer);
 
-    var characterContainer = $('<li class="chracters-list' + [i] + '"><h3 class = "character-name'+[i]+'">' + character.name + '</h3><div class= "character-infoContainer"><div class="character-info' + [i]+'"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div></div><button class="select">Select</button></li>');
-    characters.append(characterContainer);
-
-});
+// });
 
 //Character Weapons Value
-Characters.prototype.weapon = function() {
-
-    if (char1) {
-        damage = 2;
-    } else if (char2) {
-        damage = 3;
+Characters.prototype.attack = function() {
+  // returned value is the amount of damage registered
+    if (this.name === 'link') {
+        return 2;
+    } else if (this.name === 'megaman') {
+        return 3;
+    } else if (this.name === 'ryu') {
+        return 4;
     } else {
-        damage = 4;
+        return 5;
     }
 };
 
 
 //Character Special Power Value
-Characters.prototype.specialPower = function() {
-    if (char1) {
-        damage = 4;
-    } else if (char2) {
-        damage = 6;
+Characters.prototype.useSpecialPower = function() {
+    // returns a damage value
+    if (this.name === 'link') {
+        return 4;
+    } else if (this.name === 'megaman') {
+        return 6;
     } else {
-        damage = 8;
+        return  8;
     }
 };
 
@@ -94,9 +88,8 @@ $('.character-name2').click(function() {
   $('.character-info2').toggle();
 });
 
-var button = $('<button class ="start-game">BATTLE</button>');
-selectCharacter.append(button);
-
+// var button = $('<button class ="start-game">BATTLE</button>');
+// selectCharacter.append(button);
 
 
 // ARENA
@@ -105,58 +98,96 @@ var battleArena = $('.battleContainer');
 function renderBattleArena(container, character, boss) {
   //define passed in parameters for use in subFunctions
 
-
   //as there is only currently only one player all action buttons only need to provide responses for one player
+
+  //singular container for a specific characters stats
+  var $statContainer = $('<ul class="statContainer"></ul>');
+
+  //log container to display all actions
+  var $battleLog = $('<div class="battleLog"></div>');
+
   var $actionNav = $('<nav class="characterActions"></nav>');
   var $attackButton = $('<button class="attack">Attack</button>');
   var $defendButton = $('<button class="defend">Defend</button>');
   var $powerButton = $('<button class="specialPower">Super Power</button>');
-  var $statContainer = $('<ul class="statContainer"></ul>');
 
-  function renderStats(statContainer, character){
+  function renderStats(statContainer, player){
     var $li = $('<li></li>');
     var $healthBar = $('<div class="health"></div>');
-    var $currentHealth = $('<h2>current health/total health</h2>');
-    var $characterName = $('<h1>Character Name</h1>');
+    var $currentHealth = $('<h2>' + player.health + '/' + player.totalHealth + '</h2>');
+    var $characterName = $('<h1>' + player.name + '</h1>');
     // battleArena.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
     container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
 
   }
 
-  function getCharacterStats() {
-    //this will get the info for the current character and then pass the arguments in so that new info can be passed along to the stat renderer and display current into
-  }
-
-  function getBossStats() {
-    //this will get the info for the boxx and then pass the arguments in so that new info can be passed along to the stat renderer and display current boss stats
-  }
-
+  //CREATE the action bar
   battleArena.append($actionNav.append($attackButton, $defendButton, $powerButton));
-  renderStats($statContainer);
 
-  //click handling
+  //BATTLE HANDLER
   battleArena.find('.attack').on('click', function(e){
     e.preventDefault();
-    // var hit = character.attack();
-    console.log('attack');
+    var hit = character.attack();
+    //save that value and remove it from the boss.health - hit;
+    boss.health -= hit;
+    setTimeout(bossAttack, 5000);
+    $statContainer.empty();
+    //render the characters current stats
+    renderStats($statContainer, character);
+    //render the boss's current stats
+    renderStats($statContainer, boss);
+    //add the action to a log
+    return boss.health, character.health;
   });
 
   battleArena.find('.defend').on('click', function(e){
+    //defend will nullify a certain amount damage registered from the boss
     e.preventDefault();
-    console.log('defend');
-    // character.defend();
+    var defend = character.defend();
+    setTimeout(bossAttack(defend), 5000);
   });
 
   battleArena.find('.specialPower').on('click', function(e){
     e.preventDefault();
-    // console.log(specialPower);
-    character.superPower();
-    var hit = character.specialPower();
-    return hit;
+    var hit = character.useSpecialPower();
+    boss.health -= hit;
+    setTimeout(bossAttack, 5000);
+    $statContainer.empty();
+    renderStats($statContainer, character);
+    renderStats($statContainer, boss);
+    return boss.health, character.health;
   });
 
-  // console.log(battleArena.find('.health'));
+  //BOSS HANDLER
+  // if the bosses health changes that means the users turn is over
+  // call the boss to attack
+  // wait for that attack to register before allowing user to click again
+  function bossAttack (defend) {
+    var hit;
+    if (defend) {
+      hit = boss.attack() - defend;
+    } else {
+      hit = boss.attack();
+    }
+    character.health -= hit;
+    $statContainer.empty();
+    renderStats($statContainer, character);
+    renderStats($statContainer, boss);
+    alert('boss attacks');
+    return character.health;
+  }
+
+  //render initial stats
+  renderStats($statContainer, character);
+  renderStats($statContainer, boss);
+
+  //hash trigger
+  if (boss.health <= 0){
+    location.hash = '#gameOver';
+  } else if (character.health <= 0) {
+    location.hash = '#gameOver';
+  }
 
 }
-
-renderBattleArena(battleArena);
+// TESTING
+renderBattleArena(battleArena, megaman, boss);
