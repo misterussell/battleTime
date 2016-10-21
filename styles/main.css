@@ -20,19 +20,37 @@ html {
   width: 31.76157%;
   display: inline-block;
   list-style: none;
-  border: 1px solid grey;
   text-align: center;
   padding-left: 0px; }
   .characters li:last-child {
     margin-right: 0; }
 
 .select-character {
-  text-align: center; }
+  text-align: center;
+  background-image: url("images/selectcharacterbackground.png");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
 
-.character-infoContainer {
-  border: 1px solid grey;
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+  padding: .8rem 4rem;
+  border-radius: 10px;
+  display: inline-block; }
+
+.character-image {
+  background-color: black; }
+
+.character-info {
+  border: 2px solid black;
   font-size: .8rem;
-  padding: 1rem; }
+  padding: 1rem;
+  background: white;
+  border-radius: 10px; }
 
 .name-img {
   padding: 5rem; }
@@ -41,20 +59,39 @@ html {
   display: inline-block; }
 
 h3 {
+  font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
-  text-align: center; }
+  text-align: center;
+  color: white;
+  background-color: black;
+  font-size: 2rem;
+  padding-top: .5rem; }
 
 span {
+  font-family: 'Exo', sans-serif;
+  font-weight: bold;
   display: block;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-size: 1rem; }
 
 button {
-  text-align: center; }
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: .5rem;
+  margin: 1rem 0;
+  background-color: #0761AD;
+  border-radius: 10px;
+  border: 2px solid black; }
 
 .start-game {
   margin-top: 6rem;
   padding: 1rem 5rem;
-  font-size: 2rem; }
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  background-color: #FDB5A9;
+  border: 2px solid black;
+  border-radius: 10px; }
 
 .Splash-Page {
   color: white;
