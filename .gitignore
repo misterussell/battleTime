@@ -1,5 +1,7 @@
-styles/bourbon
-styles/neat
+
+main.css.map
+.sass-cache
+
 # Created by https://www.gitignore.io/api/macos
 
 ### macOS ###
