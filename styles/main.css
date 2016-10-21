@@ -1,0 +1,49 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.characters {
+  max-width: 12;
+  margin-left: auto;
+  margin-right: auto; }
+  .characters::after {
+    clear: both;
+    content: "";
+    display: block; }
+
+.characters li {
+  text-align: center;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%;
+  display: inline-block;
+  list-style: none;
+  border: 1px solid grey;
+  overflow: auto;
+  padding-left: 0px; }
+  .characters li:last-child {
+    margin-right: 0; }
+
+.character-infoContainer {
+  border: 1px solid grey;
+  font-size: .8rem;
+  padding: 1rem; }
+
+.name-img {
+  padding: 5rem; }
+
+.description li {
+  display: inline-block; }
+
+h3 {
+  text-transform: uppercase;
+  text-align: center; }
+
+span {
+  display: block;
+  text-transform: uppercase; }
+
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,39 @@
+.characters {
+  @include outer-container(12);
+}
+
+.characters li {
+  @include span-columns(3 of 12);
+  display: inline-block;
+  list-style: none;
+  border: 1px solid grey;
+  text-align: center;
+  padding-left: 0px;
+}
+
+.character-info {
+  border: 1px solid grey;
+      font-size: .8rem;
+      padding: 1rem;
+}
+
+.name-img {
+      padding: 5rem;
+}
+
+.description li {
+  display: inline-block;
+}
+
+
+h3 {
+  text-transform: uppercase;
+  text-align: center;
+}
+span {
+  display: block;
+  text-transform: uppercase;
+}
+button {
+  text-align: center;
+}
