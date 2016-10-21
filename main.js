@@ -54,7 +54,6 @@ Characters.prototype.attack = function() {
     }
 };
 
-
 //Character Special Power Value
 Characters.prototype.useSpecialPower = function() {
     // returns a damage value
@@ -121,40 +120,76 @@ function renderBattleArena(container, character, boss) {
 
   }
 
+  function gameOver() {
+    if (boss.health <= 0){
+      location.hash = '#gameOver';
+    } else if (character.health <= 0) {
+      location.hash = '#gameOver';
+    }
+  }
+
+  //CREATE the battleLog
+  battleArena.append($battleLog);
+
   //CREATE the action bar
   battleArena.append($actionNav.append($attackButton, $defendButton, $powerButton));
 
   //BATTLE HANDLER
   battleArena.find('.attack').on('click', function(e){
     e.preventDefault();
+    $('.attack').prop("disabled", true);
     var hit = character.attack();
+    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
     //save that value and remove it from the boss.health - hit;
     boss.health -= hit;
-    setTimeout(bossAttack, 5000);
     $statContainer.empty();
     //render the characters current stats
     renderStats($statContainer, character);
     //render the boss's current stats
     renderStats($statContainer, boss);
+    //set the button timeout and register the boss's damage
+    setTimeout(function() {
+      bossAttack();
+      $('.attack').prop("disabled", false);
+    }, 2500);
+    $battleLog.append(attackMessage);
     //add the action to a log
+    gameOver();
     return boss.health, character.health;
   });
 
   battleArena.find('.defend').on('click', function(e){
-    //defend will nullify a certain amount damage registered from the boss
+    //handle button behavoir
     e.preventDefault();
+    $('.defend').prop("disabled", true);
+    //set parameters
     var defend = character.defend();
-    setTimeout(bossAttack(defend), 5000);
+    var defendMessage = $('<p>' + character.name + ' blocks ' + defend + ' damage from ' + boss.name + '</p>');
+    //disable button
+    setTimeout(function() {
+      bossAttack(defend);
+      $('.defend').prop("disabled", false);
+    }, 2500);
+    gameOver();
+    //append to log
+    $battleLog.append(defendMessage);
   });
 
   battleArena.find('.specialPower').on('click', function(e){
     e.preventDefault();
+    $('.specialPower').prop("disabled", true);
     var hit = character.useSpecialPower();
+    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
     boss.health -= hit;
-    setTimeout(bossAttack, 5000);
+    setTimeout(function() {
+      bossAttack();
+      $('.specialPower').prop("disabled", false);
+    }, 2500);
     $statContainer.empty();
     renderStats($statContainer, character);
     renderStats($statContainer, boss);
+    gameOver();
+    $battleLog.append(attackMessage);
     return boss.health, character.health;
   });
 
@@ -169,11 +204,12 @@ function renderBattleArena(container, character, boss) {
     } else {
       hit = boss.attack();
     }
+    var attackMessage = $('<p>' + boss.name + ' hits ' + character.name + ' for ' + hit + ' damage.</p>');
     character.health -= hit;
     $statContainer.empty();
     renderStats($statContainer, character);
     renderStats($statContainer, boss);
-    alert('boss attacks');
+    $battleLog.append(attackMessage);
     return character.health;
   }
 
@@ -181,12 +217,13 @@ function renderBattleArena(container, character, boss) {
   renderStats($statContainer, character);
   renderStats($statContainer, boss);
 
-  //hash trigger
-  if (boss.health <= 0){
-    location.hash = '#gameOver';
-  } else if (character.health <= 0) {
-    location.hash = '#gameOver';
-  }
+  // hash trigger
+
+  // if (boss.health <= 0){
+  //   location.hash = '#gameOver';
+  // } else if (character.health <= 0) {
+  //   location.hash = '#gameOver';
+  // }
 
 }
 // TESTING
