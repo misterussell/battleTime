@@ -14,17 +14,20 @@ html {
     display: block; }
 
 .characters li {
-  text-align: center;
+  float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 23.23176%;
+  width: 31.76157%;
   display: inline-block;
   list-style: none;
   border: 1px solid grey;
-  overflow: auto;
+  text-align: center;
   padding-left: 0px; }
   .characters li:last-child {
     margin-right: 0; }
+
+.select-character {
+  text-align: center; }
 
 .character-infoContainer {
   border: 1px solid grey;
@@ -45,5 +48,12 @@ span {
   display: block;
   text-transform: uppercase; }
 
+button {
+  text-align: center; }
+
+.start-game {
+  margin-top: 6rem;
+  padding: 1rem 5rem;
+  font-size: 2rem; }
 
 /*# sourceMappingURL=main.css.map */

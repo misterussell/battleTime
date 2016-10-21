@@ -38,10 +38,12 @@ console.log(characterArray);
 
 
 //Characters Container
+var selectCharacter= $('.select-character');
 var characters = $('.characters');
 
 //Loop Through Characters for Attributes
 characterArray.forEach(function(character, i, array) {
+
     var characterContainer = $('<li class="chracters-list' + [i] + '"><h3 class = "character-name'+[i]+'">' + character.name + '</h3><div class= "character-infoContainer"><div class="character-info' + [i]+'"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div></div><button class="select">Select</button></li>');
     characters.append(characterContainer);
 
@@ -91,3 +93,6 @@ $('.character-name1').click(function() {
 $('.character-name2').click(function() {
   $('.character-info2').toggle();
 });
+
+var button = $('<button class ="start-game">BATTLE</button>');
+selectCharacter.append(button);

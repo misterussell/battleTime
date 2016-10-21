@@ -3,7 +3,7 @@
 }
 
 .characters li {
-  @include span-columns(3 of 12);
+  @include span-columns(4 of 12);
   display: inline-block;
   list-style: none;
   border: 1px solid grey;
@@ -11,7 +11,11 @@
   padding-left: 0px;
 }
 
-.character-info {
+
+.select-character {
+  text-align: center;
+}
+.character-infoContainer {
   border: 1px solid grey;
       font-size: .8rem;
       padding: 1rem;
@@ -36,4 +40,10 @@ span {
 }
 button {
   text-align: center;
+}
+
+.start-game {
+  margin-top: 6rem;
+  padding: 1rem 5rem;
+  font-size: 2rem;
 }
