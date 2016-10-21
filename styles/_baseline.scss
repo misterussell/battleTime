@@ -1,0 +1,25 @@
+body {
+  font: 62.5%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: blue;
+  @include clearfix;
+}
+
+// li {
+//   background: teal;
+//   width: 50%;
+//   float: left;
+// }
+
+// @font-face {
+//   font-family: 'NES';
+//   src: url('styles/PressStart2P.ttf') format('truetype');
+// }

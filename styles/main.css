@@ -4,6 +4,22 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
+body {
+  font: 62.5%;
+  width: 100%;
+  margin: 0;
+  padding: 0; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: blue; }
+  ul::after {
+    clear: both;
+    content: "";
+    display: block; }
+
 .characters {
   max-width: 12;
   margin-left: auto;
@@ -92,5 +108,13 @@ button {
   background-color: #FDB5A9;
   border: 2px solid black;
   border-radius: 10px; }
+
+.statContainer {
+  width: 50%;
+  display: inline;
+  background: teal; }
+
+ul.statContainer {
+  background: teal; }
 
 /*# sourceMappingURL=main.css.map */
