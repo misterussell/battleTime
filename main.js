@@ -1,3 +1,7 @@
+//Select Character Screen
+function SelectCharacter(){
+
+location.hash= '#characterSelect';
 
 //Select Character Screen
 //Characters Constructor
@@ -16,29 +20,30 @@ function Characters(name, weapon, special, liner, health, avatar) {
 var characterArray = [];
 
 //Define Characters
-var link = new Characters('link', 'sword', 'chain', '"zelda is bae"', 20);
-var megaman = new Characters('megaman', 'fireball', 'explode', '"I hate Dr.Wily"', 21);
-var ryu = new Characters('ryu', 'kick', 'tornado punch', '"Hiyuken"', 22);
-var boss = new Characters('bowser', 'punch', 'squash', ':Rawr', 25);
-
+var link = new Characters('link', 'sword', 'bow', '"zelda is bae"', 10, 'styles/images/zelda-pixel.png');
+var megaman = new Characters('megaman', 'fireball', 'explode', '"I hate Dr.Wily"', 11, 'styles/images/megaman-capcom.png');
+var ryu = new Characters('ryu', 'kick', 'tornado punch', '"Hiyuken"', 12, 'styles/images/ryu.gif');
+var boss = new Characters('bowser', 'punch', 'squash', ':Rawr', 15, 'styles/images/bowser.png');
 
 //Add Characters to Storage Array
 characterArray.push(link, megaman, ryu);
-
 // console.log(characterArray);
-
-
 //Characters Container
 var selectCharacter= $('.select-character');
 var characters = $('.characters');
 
+var selectCharacterTitle = $('<h2>Select Character</h2>');
+selectCharacter.prepend(selectCharacterTitle);
 //Loop Through Characters for Attributes
-// characterArray.forEach(function(character, i, array) {
-//
-    // var characterContainer = $('<li class="chracters-list' + [i] + '"><h3 class = "character-name'+[i]+'">' + character.name + '</h3><div class= "character-infoContainer"><div class="character-info' + [i]+'"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div></div><button class="select link">Select Link</button></li>');
-    // characters.append(characterContainer);
+characterArray.forEach(function(character, i, array) {
 
-// });
+var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image'+ character.name +' " src="'+ character.avatar +'" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name+'"><div class="character-info"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "'+ character.name + '">Select</button></div></li>');
+characters.append(characterContainer);
+
+$('.character-infoContainerlink').hide();
+$('.character-infoContainermegaman').hide();
+$('.character-infoContainerryu').hide();
+});
 
 //Character Weapons Value
 Characters.prototype.attack = function() {
@@ -49,47 +54,65 @@ Characters.prototype.attack = function() {
         return 3;
     } else if (this.name === 'ryu') {
         return 4;
-    } else {
-        return 5;
     }
 };
 
 //Character Special Power Value
-Characters.prototype.useSpecialPower = function() {
-    // returns a damage value
-    if (this.name === 'link') {
-        return 4;
-    } else if (this.name === 'megaman') {
-        return 6;
-    } else {
-        return  8;
-    }
-};
+  Characters.prototype.useSpecialPower = function() {
+      // returns a damage value
+      if (this.name === 'link') {
+          return 4;
+      } else if (this.name === 'megaman') {
+          return 6;
+      } else {
+          return  8;
+      }
+  };
+
+  //Characters Defend Value
+  Characters.prototype.defend = function() {
+      var randomDefend = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+      return randomDefend;
+  };
+
+  //Display Attributes on click
+  $('.character-imagelink').click(function() {
+    $('.character-infoContainerlink').toggle();
+  });
+
+  $('.character-imagemegaman').click(function() {
+    $('.character-infoContainermegaman').toggle();
+
+  });
+
+    $('.character-imageryu').click(function() {
+      $('.character-infoContainerryu').toggle();
+    });
+
+  var button = $('<a href="#battleArena"><button class ="start-game">BATTLE</button></a>');
+  selectCharacter.append(button);
+
+  //Select Character
+  characters.find($('.link')).on('click', function(character){
+  // return link;
+  console.log(link);
+  });
+
+  characters.find($('.megaman')).on('click', function(character){
+  // return megaman;
+  console.log(megaman);
+  });
+  characters.find($('.ryu')).on('click', function(character){
+  // return ryu;
+  console.log(ryu);
+  });
 
 
-//Characters Defend Value
-Characters.prototype.defend = function() {
-    var randomDefend = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    return randomDefend;
-};
+  characters.find($('.start-game')).on('click', function(){
+    e.target.default();
+  });
 
-
-//Display Attributes on click
-$('.character-name0').click(function() {
-  $('.character-info0').toggle();
-});
-
-$('.character-name1').click(function() {
-  $('.character-info1').toggle();
-});
-
-$('.character-name2').click(function() {
-  $('.character-info2').toggle();
-});
-
-// var button = $('<button class ="start-game">BATTLE</button>');
-// selectCharacter.append(button);
-
+}
 
 // ARENA
 var battleArena = $('.battleContainer');
@@ -217,14 +240,7 @@ function renderBattleArena(container, character, boss) {
   renderStats($statContainer, character);
   renderStats($statContainer, boss);
 
-  // hash trigger
-
-  // if (boss.health <= 0){
-  //   location.hash = '#gameOver';
-  // } else if (character.health <= 0) {
-  //   location.hash = '#gameOver';
-  // }
-
 }
 // TESTING
-renderBattleArena(battleArena, megaman, boss);
+// renderBattleArena(battleArena, megaman, boss);
+SelectCharacter();
