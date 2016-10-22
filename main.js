@@ -43,7 +43,7 @@ selectCharacter.prepend(selectCharacterTitle);
 //Loop Through Characters for Attributes
 characterArray.forEach(function(character, i, array) {
 
-    var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image'+ character.name +' " src="'+ character.avatar +'" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name+'"><div class="character-info"><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "'+ character.name + '">Select</button></div></li>');
+    var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image'+ character.name +' " src="'+ character.avatar +'" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name+'"><div class="character-info"><span>HP:</span><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "'+ character.name + '">Select</button></div></li>');
     characters.append(characterContainer);
 
 $('.character-infoContainerlink').hide();
