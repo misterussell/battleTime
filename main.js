@@ -1,6 +1,7 @@
 //build title for game
 function renderHome(title, sub, buttonText, hashLocation) {
 
+    location.hash = '#';
 
     var container = $('.Splash-Page');
     var h1 = $('<h1></h1>');
@@ -27,6 +28,7 @@ function renderHome(title, sub, buttonText, hashLocation) {
 }
 
 function checkHash() {
+
   $('.Splash-Page').empty().removeClass('restart').removeClass('home');
     if (location.hash === '') {
         $('.Splash-Page').addClass('home');
@@ -39,22 +41,41 @@ function checkHash() {
 
     } else if (location.hash === '#gameOver') {
         $('.Splash-Page').addClass('restart');
-        renderHome('Game Over', 'Player1 win/loss', 'Battle Again', ' ');
+
+    $('.Splash-Page').empty().removeClass('restart').removeClass('home');
+    if (location.hash === '') {
+      $('.Splash-Page').addClass('home');
+        renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
+    } else if (location.hash === '#characterSelect') {
+        $('.Splash-Page').html();
+        SelectCharacters();
+    } else if (location.hash === '#battle') {
+
+    } else if (location.hash === '#gameOverWinner') {
+      $('.Splash-Page').addClass('restart');
+        renderHome('Game Over', 'Player1 Wins', 'Battle Again', ' ');
+    } else if (location.hash === '#gameOverLoser') {
+      $('.Splash-Page').addClass('restart');
+        renderHome('Game Over', 'Player1 Loss', 'Battle Again', ' ');
+
     }
+  }
 }
 renderHome();
 
 checkHash();
+
 
 $(window).on('hashchange', function(e){
   checkHash();
 });
 
 
+// renderHome();
 
 
 function SelectCharacters() {
-    // $('Splash-Page').html();
+
     // Audio Clips
     var selectCharacterAudio = new Audio('styles/sounds/01-stage-select.mp3');
     var coin = new Audio('styles/sounds/smw_coin.wav');
