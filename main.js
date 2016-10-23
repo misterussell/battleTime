@@ -24,14 +24,13 @@ function renderHome(title, sub, buttonText, hashLocation) {
 
 function checkHash() {
     $('.Splash-Page').empty().removeClass('restart').removeClass('home');
-
     if (location.hash === '') {
-$('.Splash-Page').addClass('home');
+        $('.Splash-Page').addClass('home');
         renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
     } else if (location.hash === '#characterSelect') {
-        console.log('pick your poison');
+      SelectCharacters();
     } else if (location.hash === '#battle') {
-
+      renderBattleArena();
     } else if (location.hash === '#gameOver') {
       $('.Splash-Page').addClass('restart');
         renderHome('Game Over', 'Player1 win/loss', 'Battle Again', ' ');
@@ -163,6 +162,7 @@ Characters.prototype.attack = function() {
 var battleArena = $('.battleContainer');
 
 function renderBattleArena(container, character, boss) {
+  location.hash= '#battle';
   //define passed in parameters for use in subFunctions
 
   //as there is only currently only one player all action buttons only need to provide responses for one player
@@ -185,7 +185,6 @@ function renderBattleArena(container, character, boss) {
     var $characterName = $('<h1>' + player.name + '</h1>');
     // battleArena.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
     container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
-
   }
 
   function gameOver() {
@@ -284,10 +283,9 @@ function renderBattleArena(container, character, boss) {
   //render initial stats
   renderStats($statContainer, character);
   renderStats($statContainer, boss);
-
 }
 
 
 // TESTING
 // renderBattleArena(battleArena, megaman, boss);
-SelectCharacter();
+// SelectCharacter();
