@@ -11,6 +11,11 @@
 
 }
 
+.characters img:hover {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px)
+}
+
 
 .select-character {
   text-align: center;
