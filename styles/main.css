@@ -20,6 +20,20 @@ ul {
     content: "";
     display: block; }
 
+.Splash-Page {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+.home {
+  background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif"); }
+
+.home.Splash-Page {
+  height: 100vh; }
+
+.restart {
+  background: url("https://67.media.tumblr.com/209cfb0e9fdb32401a5cc02354462fad/tumblr_nrx70sOPVy1tzr9z1o1_500.gif"); }
+
 .characters {
   max-width: 12;
   margin-left: auto;
@@ -108,20 +122,6 @@ button {
   background-color: #FDB5A9;
   border: 2px solid black;
   border-radius: 10px; }
-
-.Splash-Page {
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover; }
-
-.home {
-  background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif"); }
-
-.home.Splash-Page {
-  height: 100vh; }
-
-.restart {
-  background: url("https://67.media.tumblr.com/209cfb0e9fdb32401a5cc02354462fad/tumblr_nrx70sOPVy1tzr9z1o1_500.gif"); }
 
 .statContainer {
   width: 50%;
