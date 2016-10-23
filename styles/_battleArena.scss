@@ -1,9 +1,50 @@
+.battleContainer {
+  background-image: url('images/selectcharacterbackground.png');
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+}
+
+.battleLog {
+  position: absolute;
+  bottom: 50vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.characterActions {
+  @include outer-container;
+  button {
+    @include span-columns(4);
+  }
+}
+
 .statContainer {
-  width: 50%;
+  // width: 50%;
   display: inline;
   background: teal;
 }
 
 ul.statContainer {
   background: teal;
+}
+
+.statContainer li {
+  width: 50%;
+  display: inline-block;
+}
+
+.avatars {
+  li {
+    display: inline-block;
+    text-align: center;
+    height: 10vh;
+    margin: 0 10vw;
+    img {
+      height: 25vw;
+    }
+  }
 }

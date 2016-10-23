@@ -13,22 +13,27 @@ body {
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  background: blue; }
+  margin: 0; }
   ul::after {
     clear: both;
     content: "";
     display: block; }
 
 .Splash-Page {
+  color: white;
+  text-align: center;
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover; }
 
 .home {
-  background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif"); }
+  background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif");
+  background-size: cover;
+  background-repeat: no-repeat; }
 
 .restart {
+  background-size: cover;
+  background-repeat: no-repeat;
   background: url("https://67.media.tumblr.com/209cfb0e9fdb32401a5cc02354462fad/tumblr_nrx70sOPVy1tzr9z1o1_500.gif"); }
 
 .characters {
@@ -51,6 +56,10 @@ ul {
   padding-left: 0px; }
   .characters li:last-child {
     margin-right: 0; }
+
+.characters img:hover {
+  -webkit-transform: translateX(-5px);
+  transform: translateX(-5px); }
 
 .select-character {
   text-align: center;
@@ -120,12 +129,54 @@ button {
   border: 2px solid black;
   border-radius: 10px; }
 
+.battleContainer {
+  background-image: url("images/selectcharacterbackground.png");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  position: relative; }
+
+.battleLog {
+  position: absolute;
+  bottom: 50vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center; }
+
+.characterActions {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .characterActions::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .characterActions button {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%; }
+    .characterActions button:last-child {
+      margin-right: 0; }
+
 .statContainer {
-  width: 50%;
   display: inline;
   background: teal; }
 
 ul.statContainer {
   background: teal; }
+
+.statContainer li {
+  width: 50%;
+  display: inline-block; }
+
+.avatars li {
+  display: inline-block;
+  text-align: center;
+  height: 10vh;
+  margin: 0 10vw; }
+  .avatars li img {
+    height: 25vw; }
 
 /*# sourceMappingURL=main.css.map */
