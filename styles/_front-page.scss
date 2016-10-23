@@ -1,7 +1,7 @@
 .Splash-Page {
 
-  // color: white;
-  // text-align: center;
+  color: white;
+  text-align: center;
 height: 100vh;
 background-repeat: no-repeat;
 background-size: cover;
@@ -9,11 +9,11 @@ background-size: cover;
 
 .home {
   background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif");
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // .home.Splash-Page {
-  //   height: 100vh;
-  // }
+  background-size: cover;
+  background-repeat: no-repeat;
+  .home.Splash-Page {
+    height: 100vh;
+  }
 }
 //
 .home.Splash-Page {
@@ -21,7 +21,7 @@ background-size: cover;
 }
 
 .restart {
-  // background-size: cover;
-  // background-repeat: no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
   background: url("https://67.media.tumblr.com/209cfb0e9fdb32401a5cc02354462fad/tumblr_nrx70sOPVy1tzr9z1o1_500.gif");
 }
