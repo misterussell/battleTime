@@ -160,7 +160,7 @@ function SelectCharacters() {
     characterArray.forEach(function(character, i, array) {
 
 
-        var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image' + character.name + ' " src="' + character.avatar + '" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name + '"><div class="character-info"><span>HP:</span><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "' + character.name + '">Select</button></div></li>');
+        var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image' + character.name + ' " src="' + character.avatar + '" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name + '"><div class="character-info"><span>HP: ' + character.totalHealth + '</span><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "' + character.name + '">Select</button></div></li>');
         characters.append(characterContainer);
 
 
@@ -281,10 +281,15 @@ function renderBattleArena(container, character, boss) {
   function renderStats(statContainer, player){
     var $li = $('<li></li>');
     var $healthBar = $('<div class="health"></div>');
+    var $heartBar = $('<div class="hearts"></div>');
     var $currentHealth = $('<h2>' + player.health + '/' + player.totalHealth + '</h2>');
+    var $insertHeart = $('<i class="fa fa-heart" aria-hidden="true"></i>');
     var $characterName = $('<h1>' + player.name.toUpperCase() + '</h1>');
     // battleArena.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
-    container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
+    // for(var i = 0; i < player.health; i++) {
+    //   $heartBar.append($insertHeart);
+    // }
+    container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth, $heartBar))));
   }
 
   function gameOver() {
@@ -313,7 +318,7 @@ function renderBattleArena(container, character, boss) {
     coin.play();
     $('.attack').prop("disabled", true);
     var hit = character.attack();
-    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
+    var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     //save that value and remove it from the boss.health - hit;
     boss.health -= hit;
     $statContainer.empty();
@@ -339,7 +344,7 @@ function renderBattleArena(container, character, boss) {
     $('.defend').prop("disabled", true);
     //set parameters
     var defend = character.defend();
-    var defendMessage = $('<p>' + character.name + ' prepares to block ' + defend + ' damage from ' + boss.name + '</p>');
+    var defendMessage = $('<p>**' + character.name + ' prepares to block ' + defend + ' damage from ' + boss.name + '**</p>');
     //disable button
     setTimeout(function() {
       bossAttack(defend);
@@ -355,7 +360,7 @@ function renderBattleArena(container, character, boss) {
     coin.play();
     $('.specialPower').prop("disabled", true);
     var hit = character.useSpecialPower();
-    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
+    var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     boss.health -= hit;
     setTimeout(function() {
       bossAttack();
@@ -382,9 +387,9 @@ function renderBattleArena(container, character, boss) {
       hit = boss.attack();
     }
     if (hit < 0) {
-      attackMessage = $('<p>' + boss.name + ' does no damage to ' + character.name + '</p>');
+      attackMessage = $('<p>**' + boss.name + ' does no damage to ' + character.name + '**</p>');
     } else {
-      attackMessage = $('<p>' + boss.name + ' hits ' + character.name + ' for ' + hit + ' damage.</p>');
+      attackMessage = $('<p>**' + boss.name + ' hits ' + character.name + ' for ' + hit + ' damage.**</p>');
       character.health -= hit;
     }
     $statContainer.empty();
