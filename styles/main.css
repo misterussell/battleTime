@@ -13,8 +13,7 @@ body {
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  background: blue; }
+  margin: 0; }
   ul::after {
     clear: both;
     content: "";
@@ -26,16 +25,15 @@ ul {
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover; }
+  .Splash-Page h1 {
+    margin-top: 0;
+    font-family: 'Orbitron', sans-serif;
+    padding-top: 5rem; }
 
 .home {
   background: url("https://media.giphy.com/media/lg1Qm0qy51q8w/giphy.gif");
   background-size: cover;
   background-repeat: no-repeat; }
-  .home .home.Splash-Page {
-    height: 100vh; }
-
-.home.Splash-Page {
-  height: 100vh; }
 
 .restart {
   background-size: cover;
@@ -135,12 +133,73 @@ button {
   border: 2px solid black;
   border-radius: 10px; }
 
-.statContainer {
-  width: 50%;
-  display: inline;
-  background: teal; }
+.battleContainer {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+  padding-top: 8vh; }
+  .battleContainer::after {
+    position: absolute;
+    content: "";
+    background-image: url("images/selectcharacterbackground.png");
+    opacity: .5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background-size: cover; }
 
-ul.statContainer {
-  background: teal; }
+.battleLog {
+  font-family: helvetica, sans-serif;
+  font-size: .5rem;
+  position: absolute;
+  bottom: 52vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  height: 15vh;
+  overflow: scroll;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 5px 5px 0 0;
+  padding: .5rem;
+  width: 330px; }
+
+.characterActions {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .characterActions::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .characterActions button {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%; }
+    .characterActions button:last-child {
+      margin-right: 0; }
+
+.statContainer {
+  display: inline; }
+  .statContainer li {
+    width: 50%;
+    display: inline-block;
+    padding-left: 10vw; }
+  .statContainer h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #0761AD;
+    text-shadow: 4px 4px 9px #969696; }
+
+.avatars li {
+  display: inline-block;
+  text-align: center;
+  height: 10vh;
+  width: 50%; }
+  .avatars li img {
+    height: 25vw; }
 
 /*# sourceMappingURL=main.css.map */

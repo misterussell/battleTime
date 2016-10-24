@@ -1,7 +1,11 @@
 //build title for game
+
+var characterChoice;
+var bossChoice;
+
 function renderHome(title, sub, buttonText, hashLocation) {
 
-    location.hash = '#';
+    // location.hash = '#';
 
     var container = $('.Splash-Page');
     var h1 = $('<h1></h1>');
@@ -16,7 +20,6 @@ function renderHome(title, sub, buttonText, hashLocation) {
     container.append(link.append(button));
     button.append(buttonText);
     button.on('click', function(e) {
-
         console.log('hello');
         if (button.innerText === 'Let\'s Battle') {
             console.log('hi');
@@ -31,48 +34,84 @@ function checkHash() {
 
   $('.Splash-Page').empty().removeClass('restart').removeClass('home');
     if (location.hash === '') {
-        $('.Splash-Page').addClass('home');
-        renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
-    } else if (location.hash === '#characterSelect') {
-
-        SelectCharacters();
-        console.log('test');
-    } else if (location.hash === '#battleArena') {
-
-    } else if (location.hash === '#gameOver') {
-        $('.Splash-Page').addClass('restart');
-
-    $('.Splash-Page').empty().removeClass('restart').removeClass('home');
-    if (location.hash === '') {
+      characterChoice = '';
+      bossChoice = '';
       $('.Splash-Page').addClass('home');
-        renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
+      renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
     } else if (location.hash === '#characterSelect') {
-        $('.Splash-Page').html();
-        SelectCharacters();
-    } else if (location.hash === '#battle') {
-
+      $('.Splash-Page').html();
+      SelectCharacters();
+    } else if (location.hash === '#battleArena') {
+      $('.select-character').empty();
+      $('.battleContainer').show();
+      renderBattleArena(battleArena, characterChoice, bossChoice);
     } else if (location.hash === '#gameOverWinner') {
+      $('.battleContainer').hide();
+      $('.Splash-Page').show();
       $('.Splash-Page').addClass('restart');
-        renderHome('Game Over', 'Player1 Wins', 'Battle Again', ' ');
+      renderHome('Game Over', 'Player 1 Wins', 'Battle Again', ' ');
     } else if (location.hash === '#gameOverLoser') {
+      $('.battleContainer').hide();
+      $('.Splash-Page').show();
       $('.Splash-Page').addClass('restart');
-        renderHome('Game Over', 'Player1 Loss', 'Battle Again', ' ');
-
+      renderHome('Game Over', 'Player 1 Loss', 'Battle Again', ' ');
     }
   }
-}
-renderHome();
 
-checkHash();
-
-
-$(window).on('hashchange', function(e){
-  checkHash();
-});
-
-
-// renderHome();
-
+  // function Characters(name, weapon, special, liner, health, avatar) {
+  //     this.name = name;
+  //     this.weapon = weapon;
+  //     // this.shield = sheild;
+  //     this.specialPower = special;
+  //     this.liner = liner;
+  //     this.health = health;
+  //     this.totalHealth = health;
+  //     this.avatar = avatar;
+  // }
+  //
+  // //Character Storage Array
+  // var characterArray = [];
+  //
+  // //Define Characters
+  // var link = new Characters('Link', 'Sword', 'Bow', '"zelda is bae"', 10, 'styles/images/zelda-pixel.png');
+  // var megaman = new Characters('Megaman', 'Fireball', 'explode', '"I hate Dr.Wily"', 11, 'styles/images/megaman-capcom.png');
+  // var ryu = new Characters('Ryu', 'Kick', 'Tornado Punch', '"Hiyuken"', 12, 'styles/images/ryu.gif');
+  // var boss = new Characters('Bowser', 'Punch', 'Squash', ':Rawr', 15, 'styles/images/bowser.png');
+  //
+  // //Add Characters to Storage Array
+  // characterArray.push(link, megaman, ryu);
+  //
+  // //Character Weapons Value
+  // Characters.prototype.attack = function() {
+  //     // returned value is the amount of damage registered
+  //     if (this.name === 'link') {
+  //         return 2;
+  //     } else if (this.name === 'megaman') {
+  //         return 3;
+  //     } else if (this.name === 'ryu') {
+  //         return 4;
+  //     } else {
+  //       return 2;
+  //     }
+  // };
+  //
+  // //Character Special Power Value
+  // Characters.prototype.useSpecialPower = function() {
+  //     // returns a damage value
+  //     if (this.name === 'link') {
+  //         return 4;
+  //     } else if (this.name === 'megaman') {
+  //         return 6;
+  //     } else {
+  //         return 8;
+  //     }
+  // };
+  //
+  // //Characters Defend Value
+  // Characters.prototype.defend = function() {
+  //     var randomDefend = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+  //     return randomDefend;
+  // };
 
 function SelectCharacters() {
 
@@ -86,8 +125,8 @@ function SelectCharacters() {
 
     location.hash = '#characterSelect';
 
-    //Select Character Screen
-    //Characters Constructor
+    // Select Character Screen
+    // Characters Constructor
     function Characters(name, weapon, special, liner, health, avatar) {
         this.name = name;
         this.weapon = weapon;
@@ -110,8 +149,8 @@ function SelectCharacters() {
 
     //Add Characters to Storage Array
     characterArray.push(link, megaman, ryu);
-    // console.log(characterArray);
-    //Characters Container
+    console.log(characterArray);
+    // Characters Container
     var selectCharacter = $('.select-character');
     var characters = $('.characters');
 
@@ -121,7 +160,7 @@ function SelectCharacters() {
     characterArray.forEach(function(character, i, array) {
 
 
-        var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image' + character.name + ' " src="' + character.avatar + '" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name + '"><div class="character-info"><span>HP:</span><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "' + character.name + '">Select</button></div></li>');
+        var characterContainer = $('<li class="chracter-' + character.name + '"><h3 class = "character-name">' + character.name + '</h3><img class="character-image' + character.name + ' " src="' + character.avatar + '" style="width: 75%; height: 14rem"></img><div class= "character-infoContainer' + character.name + '"><div class="character-info"><span>HP: ' + character.totalHealth + '</span><span> Weapon: ' + character.weapon + '</span><span> Special Power: ' + character.specialPower + '</span><span>' + character.liner + '</div><button class = "' + character.name + '">Select</button></div></li>');
         characters.append(characterContainer);
 
 
@@ -139,6 +178,8 @@ function SelectCharacters() {
             return 3;
         } else if (this.name === 'ryu') {
             return 4;
+        } else {
+          return 2;
         }
     };
 
@@ -159,8 +200,6 @@ function SelectCharacters() {
         var randomDefend = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
         return randomDefend;
     };
-
-
 
     //Display Attributes on click
 
@@ -187,17 +226,20 @@ function SelectCharacters() {
     characters.find($('.link')).on('click', function(character) {
         coin.play();
         // return link;
+        characterChoice = link;
         console.log(link);
     });
 
     characters.find($('.megaman')).on('click', function(character) {
         coin.play();
         // return megaman;
+        characterChoice = megaman;
         console.log(megaman);
     });
     characters.find($('.ryu')).on('click', function(character) {
         coin.play();
         // return ryu;
+        characterChoice = ryu;
         console.log(ryu);
     });
 
@@ -208,13 +250,18 @@ function SelectCharacters() {
         // e.target.default();
     });
 
-}
+    bossChoice = boss;
 
+}
 
 var battleArena = $('.battleContainer');
 
 function renderBattleArena(container, character, boss) {
+  location.hash = '#battleArena';
   //define passed in parameters for use in subFunctions
+
+  var coin = new Audio('styles/sounds/smw_coin.wav');
+  var oneUP = new Audio('styles/sounds/smw_1-up.wav');
 
   //as there is only currently only one player all action buttons only need to provide responses for one player
 
@@ -225,29 +272,38 @@ function renderBattleArena(container, character, boss) {
   var $battleLog = $('<div class="battleLog"></div>');
 
   var $actionNav = $('<nav class="characterActions"></nav>');
-  var $attackButton = $('<button class="attack">Attack</button>');
+  var $attackButton = $('<button class="attack">' + character.weapon + '</button>');
   var $defendButton = $('<button class="defend">Defend</button>');
-  var $powerButton = $('<button class="specialPower">Super Power</button>');
+  var $powerButton = $('<button class="specialPower">' + character.specialPower + '</button>');
+
+  var $characterImages = $('<ul class="avatars"><li><img src="' + character.avatar + '"/></li><li><img src="' + boss.avatar + '"/></li></ul>');
 
   function renderStats(statContainer, player){
     var $li = $('<li></li>');
     var $healthBar = $('<div class="health"></div>');
+    var $heartBar = $('<div class="hearts"></div>');
     var $currentHealth = $('<h2>' + player.health + '/' + player.totalHealth + '</h2>');
-    var $characterName = $('<h1>' + player.name + '</h1>');
+    var $insertHeart = $('<i class="fa fa-heart" aria-hidden="true"></i>');
+    var $characterName = $('<h1>' + player.name.toUpperCase() + '</h1>');
     // battleArena.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
-    container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth))));
-
+    // for(var i = 0; i < player.health; i++) {
+    //   $heartBar.append($insertHeart);
+    // }
+    container.append(statContainer.append($li.append($characterName, $healthBar.append($currentHealth, $heartBar))));
   }
-
-
 
   function gameOver() {
     if (boss.health <= 0){
-      location.hash = '#gameOver';
+      location.hash = '#gameOverWinner';
     } else if (character.health <= 0) {
-      location.hash = '#gameOver';
+      location.hash = '#gameOverLoser';
+    } else {
+      location.hash = '#battleArena';
     }
   }
+
+  //CREATE the battle Images
+  battleArena.append($characterImages);
 
   //CREATE the battleLog
   battleArena.append($battleLog);
@@ -259,9 +315,10 @@ function renderBattleArena(container, character, boss) {
 
   battleArena.find('.attack').on('click', function(e){
     e.preventDefault();
+    coin.play();
     $('.attack').prop("disabled", true);
     var hit = character.attack();
-    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
+    var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     //save that value and remove it from the boss.health - hit;
     boss.health -= hit;
     $statContainer.empty();
@@ -283,10 +340,11 @@ function renderBattleArena(container, character, boss) {
   battleArena.find('.defend').on('click', function(e){
     //handle button behavoir
     e.preventDefault();
+    coin.play();
     $('.defend').prop("disabled", true);
     //set parameters
     var defend = character.defend();
-    var defendMessage = $('<p>' + character.name + ' blocks ' + defend + ' damage from ' + boss.name + '</p>');
+    var defendMessage = $('<p>**' + character.name + ' prepares to block ' + defend + ' damage from ' + boss.name + '**</p>');
     //disable button
     setTimeout(function() {
       bossAttack(defend);
@@ -299,9 +357,10 @@ function renderBattleArena(container, character, boss) {
 
   battleArena.find('.specialPower').on('click', function(e){
     e.preventDefault();
+    coin.play();
     $('.specialPower').prop("disabled", true);
     var hit = character.useSpecialPower();
-    var attackMessage = $('<p>' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.</p>');
+    var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     boss.health -= hit;
     setTimeout(function() {
       bossAttack();
@@ -321,27 +380,36 @@ function renderBattleArena(container, character, boss) {
   // wait for that attack to register before allowing user to click again
   function bossAttack (defend) {
     var hit;
+    var attackMessage;
     if (defend) {
       hit = boss.attack() - defend;
     } else {
       hit = boss.attack();
     }
-    var attackMessage = $('<p>' + boss.name + ' hits ' + character.name + ' for ' + hit + ' damage.</p>');
-    character.health -= hit;
+    if (hit < 0) {
+      attackMessage = $('<p>**' + boss.name + ' does no damage to ' + character.name + '**</p>');
+    } else {
+      attackMessage = $('<p>**' + boss.name + ' hits ' + character.name + ' for ' + hit + ' damage.**</p>');
+      character.health -= hit;
+    }
     $statContainer.empty();
     renderStats($statContainer, character);
     renderStats($statContainer, boss);
     $battleLog.append(attackMessage);
+    oneUP.play();
     return character.health;
   }
 
   //render initial stats
   renderStats($statContainer, character);
   renderStats($statContainer, boss);
-
 }
 
+$('.battleContainer').hide();
 
-// TESTING
-// renderBattleArena(battleArena, megaman, boss);
-// SelectCharacters();
+$('.Splash-Page').addClass('home');
+renderHome('Battle Game', 'Start New Game', 'Let\'s Battle', '#characterSelect');
+
+$(window).on('hashchange', function(e) {
+    checkHash();
+  });
