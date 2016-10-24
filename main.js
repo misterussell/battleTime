@@ -317,6 +317,8 @@ function renderBattleArena(container, character, boss) {
     e.preventDefault();
     coin.play();
     $('.attack').prop("disabled", true);
+    $('.defend').prop("disabled", true);
+    $('.specialPower').prop("disabled", true);
     var hit = character.attack();
     var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     //save that value and remove it from the boss.health - hit;
@@ -330,6 +332,8 @@ function renderBattleArena(container, character, boss) {
     setTimeout(function() {
       bossAttack();
       $('.attack').prop("disabled", false);
+      $('.defend').prop("disabled", false);
+      $('.specialPower').prop("disabled", false);
     }, 2500);
     $battleLog.append(attackMessage);
     //add the action to a log
@@ -341,14 +345,18 @@ function renderBattleArena(container, character, boss) {
     //handle button behavoir
     e.preventDefault();
     coin.play();
+    $('.attack').prop("disabled", true);
     $('.defend').prop("disabled", true);
+    $('.specialPower').prop("disabled", true);
     //set parameters
     var defend = character.defend();
     var defendMessage = $('<p>**' + character.name + ' prepares to block ' + defend + ' damage from ' + boss.name + '**</p>');
     //disable button
     setTimeout(function() {
       bossAttack(defend);
+      $('.attack').prop("disabled", false);
       $('.defend').prop("disabled", false);
+      $('.specialPower').prop("disabled", false);
     }, 2500);
     gameOver();
     //append to log
@@ -358,12 +366,16 @@ function renderBattleArena(container, character, boss) {
   battleArena.find('.specialPower').on('click', function(e){
     e.preventDefault();
     coin.play();
+    $('.attack').prop("disabled", true);
+    $('.defend').prop("disabled", true);
     $('.specialPower').prop("disabled", true);
     var hit = character.useSpecialPower();
     var attackMessage = $('<p>**' + character.name + ' used ' + character.weapon + ' on  ' + boss.name + ' for ' + hit + ' damage.**</p>');
     boss.health -= hit;
     setTimeout(function() {
       bossAttack();
+      $('.attack').prop("disabled", false);
+      $('.defend').prop("disabled", false);
       $('.specialPower').prop("disabled", false);
     }, 2500);
     $statContainer.empty();
